@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "My Home Page";
+}
+
+
+<h1>Main Page For Books <strong>MVC!</strong></h1>
+<div class="alert alert-info">
+    <p>This Site Is Under Construction</p>
+</div>
+
+
+@{ 
+    var words = new List<string> { "Dog", "Cat", "Mouse" };
+    var age = 20;
+}
+
+<ul>
+    @foreach(var word in words)
+    {
+        <li>@word</li>
+    }
+</ul>
+
+@if (age >= 21)
+{
+    <h3>You are old enough for a beer!</h3>
+}
+else
+{
+    <h3>Too young. Have some juice.</h3>
+}
