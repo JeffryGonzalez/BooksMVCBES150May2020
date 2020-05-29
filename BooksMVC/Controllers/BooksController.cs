@@ -20,6 +20,30 @@ namespace BooksMVC.Controllers
             _dataContext = dataContext;
         }
 
+        
+        public async Task<IActionResult> Edit(int id)
+        {
+            // TODO:If it isn't there, send a 404
+            var bookToEdit = await _dataContext.Books
+                .Select(b => new BookEdit
+                {
+                    Id = b.Id,
+                    Title = b.Title,
+                    Author = b.Author,
+                    NumberOfPages = b.NumberOfPages,
+                    PublicationDate = new DateTime(1969,4,20)
+                })
+                .SingleOrDefaultAsync(b => b.Id == id);
+
+            return View(bookToEdit);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Update(BookEdit editedBook)
+        {
+            // Todo: Validate it, update it, redirect
+            return View();
+        }
+
         public IActionResult New()
         {
 
