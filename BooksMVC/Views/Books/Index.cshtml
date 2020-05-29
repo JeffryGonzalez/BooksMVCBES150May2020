@@ -1,9 +1,16 @@
 ﻿@using BooksMVC.Models.Books
 @model GetBooksResponseModel
 
-
+@{
+    ViewData["title"] = "The Books";
+}
 <h2>Our Huge Selection of Books</h2>
-
+@if(ViewData["sale"] != null)
+{
+    <div class="alert alert-success">
+        <h3>@ViewData["sale"]</h3>
+    </div>
+}
 <ul class="list-unstyled">
     @foreach (var book in Model.Books)
     {

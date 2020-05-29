@@ -20,6 +20,35 @@ namespace BooksMVC.Controllers
             _dataContext = dataContext;
         }
 
+        public IActionResult New()
+        {
+
+            return View(new BookCreate());
+        }
+
+        [HttpPost("/books")]
+        public async Task<IActionResult> Create(BookCreate bookToAdd)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View("New", bookToAdd);
+            } else
+            {
+                // add it to the database and stuff. TODO
+                var book = new Book
+                {
+                    Title = bookToAdd.Title,
+                    Author = bookToAdd.Author,
+                    InInventory = true,
+                    NumberOfPages = bookToAdd.NumberOfPages
+                };
+                _dataContext.Books.Add(book);
+                await _dataContext.SaveChangesAsync();
+                TempData["flash"] = $"Book {book.Title} add as {book.Id}";
+                return RedirectToAction("New"); // PRG
+            }
+        }
+
         [HttpGet("/books/{bookId:int}")]
         public async Task<IActionResult> Details(int bookId)
         {
@@ -50,7 +79,7 @@ namespace BooksMVC.Controllers
             //// NO Model. just serializing the domain objects.
             //var response = await _dataContext.Books.Where(b => b.InInventory).ToListAsync();
             //return View(response);
-
+            ViewData["sale"] = "All Books are 20% Off Until Friday";
             var response = new GetBooksResponseModel
             {
                 Books = await _dataContext.Books.Where(b => b.InInventory).Select(b => new BooksResponseItemModel

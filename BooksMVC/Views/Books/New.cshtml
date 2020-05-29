@@ -1,0 +1,40 @@
+﻿@model BookCreate
+
+<partial name="_Header" />
+<h2>Add A New Books</h2>
+@if(TempData["flash"] != null)
+{
+    <div class="alert alert-success">
+        <h3>@TempData["flash"]</h3>
+    </div>
+}
+<form method="post" asp-controller="Books" asp-action="Create">
+
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Author"></label>
+        <input asp-for="Author" class="form-control" />
+        <span asp-validation-for="Author" class="text-danger"></span>
+
+    </div>
+    <div class="form-group">
+        <label asp-for="NumberOfPages"></label>
+        <input asp-for="NumberOfPages" class="form-control" />
+        <span asp-validation-for="NumberOfPages" class="text-danger"></span>
+
+    </div>
+    <div class="form-group">
+        <label asp-for="PublicationDate"></label>
+        <input asp-for="PublicationDate" />
+        <span asp-validation-for="PublicationDate" class="text-danger"></span>
+
+    </div>
+    <input type="submit" value="Add Book" class="btn btn-success" />
+</form>
+@section Scripts {
+@await Html.PartialAsync("_ValidationScriptsPartial")
+}
