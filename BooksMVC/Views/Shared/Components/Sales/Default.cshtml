@@ -1,0 +1,10 @@
+﻿@model List<BooksMVC.ViewComponents.BookSalesModel>
+
+    <h3>The Following Books Are On Sale!</h3>
+    <ul class="list-unstyled">
+        @foreach (var book in Model) {
+        <li class="text-success">
+            @book.Slug is %@book.PercentOff
+        </li>
+        }
+    </ul>

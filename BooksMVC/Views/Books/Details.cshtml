@@ -16,4 +16,13 @@
 </div>
 <div>
     <a class="btn btn-primary" asp-controller="Books" asp-action="Index">Back To List</a>
+    <a class="btn btn-primary" 
+       asp-controller="Books" 
+       asp-action="Edit" 
+       asp-route-id="@Model.Id">Edit @Model.Title</a>
+    <form method="post" asp-controller="Books" asp-action="RemoveFromInventory">
+        <input type="hidden" value="@Model.Id" name="bookId" />
+        <input type="submit" value="Remove From Inventory" class="btn btn-primary" />
+    </form>
+
 </div>

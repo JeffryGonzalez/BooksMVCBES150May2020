@@ -1,29 +1,33 @@
-﻿@model BookEdit 
+﻿@model BookEdit
 
-    <form method="post" asp-controller="Books" asp-action="Update">
-        <input asp-for="Id" />
-        <div class="form-group">
-            <label asp-for="Title"></label>
-            <input asp-for="Title" class="form-control" />
-            <span asp-validation-for="Title" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Author"></label>
-            <input asp-for="Author" class="form-control" />
-            <span asp-validation-for="Author" class="text-danger"></span>
+<form method="post" asp-controller="Books" asp-action="Update">
+    <input asp-for="Id" />
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Author"></label>
+        <input asp-for="Author" class="form-control" />
+        <span asp-validation-for="Author" class="text-danger"></span>
 
-        </div>
-        <div class="form-group">
-            <label asp-for="NumberOfPages"></label>
-            <input asp-for="NumberOfPages" class="form-control" />
-            <span asp-validation-for="NumberOfPages" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="NumberOfPages"></label>
+        <input asp-for="NumberOfPages" class="form-control" />
+        <span asp-validation-for="NumberOfPages" class="text-danger"></span>
 
-        </div>
-        <div class="form-group">
-            <label asp-for="PublicationDate"></label>
-            <input asp-for="PublicationDate" />
-            <span asp-validation-for="PublicationDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PublicationDate"></label>
+        <input asp-for="PublicationDate" />
+        <span asp-validation-for="PublicationDate" class="text-danger"></span>
 
-        </div>
-        <input type="submit" value="Update Book" class="btn btn-success" />
-        </form>
+    </div>
+    <input type="submit" value="Update Book" class="btn btn-success" />
+</form>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

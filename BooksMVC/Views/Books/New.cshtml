@@ -2,12 +2,7 @@
 
 <partial name="_Header" />
 <h2>Add A New Books</h2>
-@if(TempData["flash"] != null)
-{
-    <div class="alert alert-success">
-        <h3>@TempData["flash"]</h3>
-    </div>
-}
+
 <form method="post" asp-controller="Books" asp-action="Create">
 
     <div class="form-group">

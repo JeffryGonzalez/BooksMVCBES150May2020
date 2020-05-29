@@ -20,7 +20,16 @@ namespace BooksMVC.Controllers
             _dataContext = dataContext;
         }
 
-        
+        [HttpPost]
+        public async Task<IActionResult> RemoveFromInventory(int bookId)
+        {
+            var book = await _dataContext.Books.SingleOrDefaultAsync(b => b.Id == bookId);
+            book.InInventory = false;
+            await _dataContext.SaveChangesAsync();
+            TempData["flash"] = $"Removed {book.Title} from inventory.";
+            return RedirectToAction("Index");
+        }
+
         public async Task<IActionResult> Edit(int id)
         {
             // TODO:If it isn't there, send a 404
@@ -41,7 +50,21 @@ namespace BooksMVC.Controllers
         public async Task<IActionResult> Update(BookEdit editedBook)
         {
             // Todo: Validate it, update it, redirect
-            return View();
+            if(!ModelState.IsValid)
+            {
+                return View("Edit", editedBook);
+            } else
+            {
+                var storedBook = await _dataContext.Books
+                    .SingleOrDefaultAsync(b => b.Id == editedBook.Id);
+                storedBook.Title = editedBook.Title;
+                storedBook.Author = editedBook.Author;
+                storedBook.NumberOfPages = editedBook.NumberOfPages;
+                await _dataContext.SaveChangesAsync();
+                TempData["flash"] = "Updated your book";
+                return RedirectToAction("Index");
+
+            }
         }
 
         public IActionResult New()
